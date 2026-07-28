@@ -1,0 +1,210 @@
+openapi: 3.0.0
+info:
+  title: nexachain-mern-assessment
+  version: 1.0.0
+  description: '## MERN Stack Developer Technical Assessment'
+servers:
+  - url: 'http://127.0.0.1:8000/api/v1'
+  - url: 'https://nexachain-exp-server.onrender.com/api/v1'
+paths:
+  /users/register:
+    post:
+      summary: Registers a new user account and links them to their referrer.
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fullName:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                mobileNumber:
+                  type: string
+                  format: utc-millisec
+                password:
+                  type: string
+                  format: color
+                confirmPassword:
+                  type: string
+                  format: color
+                referralCodeUsed(optional):
+                  type: string
+            example:
+              fullName: Parent User
+              email: parent@test.com
+              mobileNumber: '+919876543210'
+              password: 'Admin@123'
+              confirmPassword: 'Admin@123'
+              referralCodeUsed: XXXXXXXX
+  /users/login:
+    post:
+      summary: Verifies credentials, manages session tracking, and returns tokens.
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: color
+            example:
+              email: parent@test.com
+              password: 'Admin@123'
+  /users/logout:
+    post:
+      summary: Clears secure cookies and destroys the active token session.
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - users
+  /users/refresh-token:
+    post:
+      summary: Evaluates refresh tokens to issue new short-lived access tokens.
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - users
+  /investments/create-investment:
+    post:
+      summary: Creates a new investment contract plan using available wallet balance.
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - investments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                investmentAmount:
+                  type: integer
+                planDetails:
+                  type: string
+            example:
+              investmentAmount: 10000
+              planDetails: This is plan details for parent user
+  /investments/get-my-investments:
+    get:
+      summary: Fetches all active, completed, or cancelled investment contracts for the user.
+      parameters:
+        - name: investmentStatus
+          in: query
+          schema:
+            type: string
+          example: Active
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - investments
+  /investments/get-roi-history:
+    get:
+      summary: Fetches the historical log of all daily ROI payouts received by the user.
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - investments
+  /dashboard/stats:
+    get:
+      summary: Returns core KPIs including wallet balance, total investments, and earnings totals.
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - dashboard
+  /referrals/direct-refs:
+    get:
+      summary: Fetches the first-line direct user referrals list with engagement stats.
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - referrals
+  /referrals/comp-ref-tree:
+    get:
+      summary: Calculates and returns a structured object mapping the multi-level downline tree.
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - referrals
+  /referrals/get-referral-income-history:
+    get:
+      summary: Audits chronological log of commissions earned from downline registrations.
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - referrals
+  /admin/payout/trigger:
+    post:
+      summary: 'Testing Utility Only: Manually triggers the automated daily cron distribution cycle.'
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successfull response
+          content:
+            application/json: {}
+      tags:
+        - admin

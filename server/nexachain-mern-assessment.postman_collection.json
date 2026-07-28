@@ -1,0 +1,298 @@
+{
+  "info": {
+    "_postman_id": "a4e9a350-b0b7-411a-b5f0-98cb848357ea",
+    "name": "nexachain-mern-assessment",
+    "description": "## MERN Stack Developer Technical Assessment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43177207"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/users/logout",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "logout"
+              ]
+            },
+            "description": "Clears secure cookies and destroys the active token session."
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"parent@test.com\",\n    \"password\": \"Admin@123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/login",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            },
+            "description": "Verifies credentials, manages session tracking, and returns tokens."
+          },
+          "response": []
+        },
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fullName\": \"Parent User\",\n    \"email\": \"parent@test.com\",\n    \"mobileNumber\": \"+919876543210\",\n    \"password\": \"Admin@123\",\n    \"confirmPassword\": \"Admin@123\",\n    \"referralCodeUsed\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/register",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            },
+            "description": "Registers a new user account and links them to their referrer."
+          },
+          "response": []
+        },
+        {
+          "name": "refresh-token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/users/refresh-token",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "refresh-token"
+              ]
+            },
+            "description": "Evaluates refresh tokens to issue new short-lived access tokens."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "investments",
+      "item": [
+        {
+          "name": "create-investment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"investmentAmount\": 10000,\n    \"planDetails\": \"This is plan details for parent user\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/investments/create-investment",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "investments",
+                "create-investment"
+              ]
+            },
+            "description": "Creates a new investment contract plan using available wallet balance."
+          },
+          "response": []
+        },
+        {
+          "name": "get-investments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/investments/get-my-investments?investmentStatus=Active",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "investments",
+                "get-my-investments"
+              ],
+              "query": [
+                {
+                  "key": "investmentStatus",
+                  "value": "Active"
+                }
+              ]
+            },
+            "description": "Fetches all active, completed, or cancelled investment contracts for the user."
+          },
+          "response": []
+        },
+        {
+          "name": "get-roi-history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/investments/get-roi-history",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "investments",
+                "get-roi-history"
+              ]
+            },
+            "description": "Fetches the historical log of all daily ROI payouts received by the user."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "item": [
+        {
+          "name": "payout-trigger",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/admin/payout/trigger",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "admin",
+                "payout",
+                "trigger"
+              ]
+            },
+            "description": "Testing Utility Only: Manually triggers the automated daily cron distribution cycle."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "dashboard",
+      "item": [
+        {
+          "name": "stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/dashboard/stats",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "dashboard",
+                "stats"
+              ]
+            },
+            "description": "Returns core KPIs including wallet balance, total investments, and earnings totals."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "referrals",
+      "item": [
+        {
+          "name": "get-direct-referrals",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/referrals/direct-refs",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "referrals",
+                "direct-refs"
+              ]
+            },
+            "description": "Fetches the first-line direct user referrals list with engagement stats."
+          },
+          "response": []
+        },
+        {
+          "name": "get-complete-referral-tree",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/referrals/comp-ref-tree",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "referrals",
+                "comp-ref-tree"
+              ]
+            },
+            "description": "Calculates and returns a structured object mapping the multi-level downline tree."
+          },
+          "response": []
+        },
+        {
+          "name": "get-referral-income-history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/referrals/get-referral-income-history",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "referrals",
+                "get-referral-income-history"
+              ]
+            },
+            "description": "Audits chronological log of commissions earned from downline registrations."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
